@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; Apache Crail incubating 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Run" href="run.html" />
+    <link rel="prev" title="Docker" href="docker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Apache Crail incubating
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deploy Crail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Building from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#crail-site-conf">crail-site.conf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rpc">RPC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#storage-tiers">Storage Tiers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tcp-tier">TCP Tier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rdma-tier">RDMA Tier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nvmf-tier">NVMf Tier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#crail-env-sh">crail-env.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-site-xml">core-site.xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slaves">slaves</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iobench.html">iobench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fsck.html">fsck</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark.html">Spark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="develop.html">Programming against Crail</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="release.html">How to release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Crail incubating</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>To configure Crail use the *.template files as a basis and modify it to match your environment.
+Set the <code class="code docutils literal notranslate"><span class="pre">$CRAIL_HOME</span></code> environment variable to your Crail deployment’s path.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CRAIL_HOME</span>/conf
+mv crail-site.conf.template crail-site.conf
+mv crail-env.sh.template crail-env.sh
+mv core-site.xml.template core-site.xml
+mv slaves.template slaves
+</pre></div>
+</div>
+<p><strong>Note:</strong> <em>Docker containers can be configured by using config files above. However it is only recommended for complex configurations. See</em> <a class="reference internal" href="docker.html#docker"><span class="std std-ref">Docker</span></a> <em>for details.</em></p>
+<p>The purpuse of each of these files are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#crail-site-conf"><span class="std std-ref">crail-site.conf</span></a>: Configuration of the file system, data tiers and RPC</li>
+<li><a class="reference internal" href="#crail-env-sh"><span class="std std-ref">crail-env.sh</span></a>: Allows to pass additional JVM arguments</li>
+<li><a class="reference internal" href="#core-site-xml"><span class="std std-ref">core-site.xml</span></a>: Configuration of the HDFS adapter</li>
+<li><a class="reference internal" href="#slaves"><span class="std std-ref">slaves</span></a>: Used by the start-crail.sh script to ease running Crail on multiple machines</li>
+</ul>
+<div class="section" id="crail-site-conf">
+<h2>crail-site.conf<a class="headerlink" href="#crail-site-conf" title="Permalink to this headline">¶</a></h2>
+<p>There are a general file system properties and specific properties for the different storage tiers. Typical properties you might want to change are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="24%" />
+<col width="42%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.namenode.address</span></code></td>
+<td>crail://localhost:9060</td>
+<td>Namenode hostname and port</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.cachelimit</span></code></td>
+<td>1073741824</td>
+<td>Size (byte) of client buffer cache</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.cachepath</span></code></td>
+<td>/dev/hugepages/cache</td>
+<td>Hugepage path to client buffer cache</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced properties (<em>Only modify if you know what you are doing</em>):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="32%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.directorydepth</span></code></td>
+<td>16</td>
+<td>Maximum depth of directory tree</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.tokenexpiration</span></code></td>
+<td>10</td>
+<td>Seconds write token is valid</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.blocksize</span></code></td>
+<td>1048576</td>
+<td>Size (byte) of block</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.user</span></code></td>
+<td>crail</td>
+<td>Username used for HDFS adapter</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.debug</span></code></td>
+<td>false</td>
+<td>Enable debug output</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.statistics</span></code></td>
+<td>true</td>
+<td>Collect statistics</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.rpctimeout</span></code></td>
+<td>1000</td>
+<td>RPC timeout in milliseconds</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.datatimeout</span></code></td>
+<td>1000</td>
+<td>Data operation timeout in milliseconds</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.buffersize</span></code></td>
+<td>1048576</td>
+<td>Size (byte) of buffer (buffered stream)</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.slicesize</span></code></td>
+<td>524288</td>
+<td>Size (byte) of slice (transfer unit)</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.singleton</span></code></td>
+<td>true</td>
+<td>Only create a single instance of the FS</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.regionsize</span></code></td>
+<td>1073741824</td>
+<td>Size (byte) of allocation unit (Cache)</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.directoryrecord</span></code></td>
+<td>512</td>
+<td>Size (byte) of directory entry</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.directoryrandomize</span></code></td>
+<td>true</td>
+<td>Randomize iteration of directories</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.cacheimpl</span></code></td>
+<td>org.apache.crail.memory.MappedBufferCache</td>
+<td>Client buffer cache implementation</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.namenode.fileblocks</span></code></td>
+<td>16</td>
+<td>File</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.namenode.blockselection</span></code></td>
+<td>roundrobin</td>
+<td>Block selection algorithm: roundrobin or random</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="rpc">
+<h3>RPC<a class="headerlink" href="#rpc" title="Permalink to this headline">¶</a></h3>
+<p>Crail’s modular architecture allows to plugin different kinds of RPC implementations. The <code class="code docutils literal notranslate"><span class="pre">crail.namenode.rpctype</span></code> property
+is used to configure the RPC implementation. We currently offer two implementations:</p>
+<ul class="simple">
+<li>A TCP implementation based on <a class="reference external" href="https://github.com/zrlio/narpc">narpc</a> (default):
+<strong>org.apache.crail.namenode.rpc.tcp.TcpNameNode</strong></li>
+<li>A RDMA implementation based on <a class="reference external" href="https://github.com/zrlio/darpc">darpc</a>:
+<strong>org.apache.crail.namenode.rpc.darpc.DaRPCNameNode</strong></li>
+</ul>
+<div class="section" id="logging">
+<h4>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h4>
+<p>To allow shutting down the namenode without loosing data Crail offers namenode logging.
+It can be enabled by setting a path to the log file with <code class="code docutils literal notranslate"><span class="pre">crail.namenode.log</span></code>.</p>
+<p><strong>Note:</strong> <em>this feature is experimental and should be used with caution</em></p>
+</div>
+</div>
+<div class="section" id="storage-tiers">
+<h3>Storage Tiers<a class="headerlink" href="#storage-tiers" title="Permalink to this headline">¶</a></h3>
+<p>Crail offers multiple types of datanode dependent on your network and storage requirements:</p>
+<ol class="loweralpha simple">
+<li>TCP storage tier backed by DRAM (default)</li>
+<li>RDMA storage tier backed by DRAM</li>
+<li>NVMe over Fabrics storage tier, typically backed by NVMe drives</li>
+</ol>
+<p>Crail allows to use multiple storage tier types together, e.g. to store hot data on
+DRAM and cold data on NVMe, or extend your DRAM by NVMe storage. Storage types can be
+configured as a comma separated list by setting the <code class="code docutils literal notranslate"><span class="pre">crail.storage.types</span></code> property:</p>
+<ol class="loweralpha simple">
+<li>TCP: <strong>org.apache.crail.storage.tcp.TcpStorageTier</strong></li>
+<li>RDMA: <strong>org.apache.crail.storage.rdma.RdmaStorageTier</strong></li>
+<li>NVMf: <strong>org.apache.crail.storage.nvmf.NvmfStorageTier</strong></li>
+</ol>
+<p>Each of the storage types in the list defines a storage class, starting from storage class 0.
+Types can appear multiple times to allow defining multiple storage classes for a type.
+The maximum number of storage classes needs to be specified with the
+<code class="code docutils literal notranslate"><span class="pre">crail.storage.classes</span></code> property (default = 1).
+In the default configuration storage classes are used in incremental order, i.e.
+storage class 0 is used until no more space is left then storage class 1 is used and so on.
+However filesystem nodes (e.g. files) can also be created on a particular storage class and
+can be configured to inherit the storage class of its container. The default storage
+class of <cite>/</cite> is 0 however it can be configured via <code class="code docutils literal notranslate"><span class="pre">crail.storage.rootclass</span></code>.</p>
+<p>Storage tiers send keep alive messages to the namenode to indicate that they are still
+running and no error has occured. The interval in which keep alive message are
+send can be configured in seconds with <code class="code docutils literal notranslate"><span class="pre">crail.storage.keepalive</span></code>.</p>
+<p>Some of the configuration properties can be set via the command line when starting
+a storage tier. Refer to <a class="reference internal" href="run.html#run"><span class="std std-ref">Run</span></a> for details.</p>
+<div class="section" id="tcp-tier">
+<h4>TCP Tier<a class="headerlink" href="#tcp-tier" title="Permalink to this headline">¶</a></h4>
+<p>The TCP storage tier (org.apache.crail.storage.tcp.TcpStorageTier) is backed by DRAM. The following
+properties can be set to configure the storage tier:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="18%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.interface</span></code></td>
+<td>eth0</td>
+<td>Network interface to bind to</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.storagelimit</span></code></td>
+<td>1073741824</td>
+<td>Size (Bytes) of DRAM to provide, multiple of allocation size</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.datapath</span></code></td>
+<td>/dev/hugepages/data</td>
+<td>Hugepage path to data</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced properties:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="20%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.port</span></code></td>
+<td>50020</td>
+<td>Port to listen on</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.allocationsize</span></code></td>
+<td>crail.regionsize</td>
+<td>Allocation unit</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.queuedepth</span></code></td>
+<td>16</td>
+<td>Data operation queue depth (single connection)</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.tcp.cores</span></code></td>
+<td>1</td>
+<td>Threads to process requests</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rdma-tier">
+<h4>RDMA Tier<a class="headerlink" href="#rdma-tier" title="Permalink to this headline">¶</a></h4>
+<p>The RDMA storage tier (org.apache.crail.storage.rdma.RdmaStorageTier) is backed by DRAM. The following
+properties can be set to configure the storage tier:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="18%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.interface</span></code></td>
+<td>eth0</td>
+<td>Network interface to bind to</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.storagelimit</span></code></td>
+<td>1073741824</td>
+<td>Size (Bytes) of DRAM to provide; multiple of allocation size</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.datapath</span></code></td>
+<td>/dev/hugepages/data</td>
+<td>Hugepage path to data</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced properties:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="18%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.port</span></code></td>
+<td>50020</td>
+<td>Port to listen on</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.allocationsize</span></code></td>
+<td>crail.regionsize</td>
+<td>Allocation unit</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.localmap</span></code></td>
+<td>true</td>
+<td>Use mmap if client is colocated with data tier</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.queuesize</span></code></td>
+<td>32</td>
+<td>Data operation queue depth (single connection)</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.type</span></code></td>
+<td>passive</td>
+<td>Operation type: passive or active (see DiSNI)</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.persistent</span></code></td>
+<td>false</td>
+<td>Allow restarting a data tier if namenode logging is used</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.backlog</span></code></td>
+<td>100</td>
+<td>Listen backlog</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.rdma.connecttimeout</span></code></td>
+<td>1000</td>
+<td>Connect timeout in milliseconds</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nvmf-tier">
+<h4>NVMf Tier<a class="headerlink" href="#nvmf-tier" title="Permalink to this headline">¶</a></h4>
+<p>The NVMf storage tier (org.apache.crail.storage.nvmf.NvmfStorageTier) is typically backed by NVMe drives. However some target
+implementations support using any block device. Unlike the RDMA and TCP storage tier the NVMf storage tier is not involved
+in any data operation but only is used to provide metadata information. Crail uses the <a class="reference external" href="https://github.com/zrlio/jNVMf">jNVMf</a>
+library to connect to a standard NVMf target to gain metadata information about the storage and provide the information to the namenode.
+Clients directly connect to the NVMf target. Crail has been tested to run with the Linux kernel, SPDK and Mellanox ConnectX-5
+offloading target.</p>
+<p>The following properties can be set to configure the storage tier:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="21%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.ip</span></code></td>
+<td>localhost</td>
+<td>IP/hostname of NVMf target</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.port</span></code></td>
+<td>50025</td>
+<td>Port of NVMf target</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.nqn</span></code></td>
+<td>nqn.2017-06.io.crail:cnode</td>
+<td>NVMe qualified name of NVMf controller</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.namespace</span></code></td>
+<td>1</td>
+<td>Namespace of NVMe device</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.hostnqn</span></code></td>
+<td>&lt;random 128bit UUID&gt;</td>
+<td>NVMe qualified name of host</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced properties:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="18%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.allocationsize</span></code></td>
+<td>crail.regionsize</td>
+<td>Allocation unit</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.queueSize</span></code></td>
+<td>64</td>
+<td>NVMf submission queue size</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">crail.storage.nvmf.stagingcachesize</span></code></td>
+<td>262144</td>
+<td>Staging cache size (byte) for read-modify-write operations</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="crail-env-sh">
+<h2>crail-env.sh<a class="headerlink" href="#crail-env-sh" title="Permalink to this headline">¶</a></h2>
+<p>Modify crail-env.sh to pass additional JVM arguments to <code class="code docutils literal notranslate"><span class="pre">crail</span></code> respectively
+<code class="code docutils literal notranslate"><span class="pre">start-crail.sh</span></code>.</p>
+<p>It is recommended to increase heap (e.g. <code class="code docutils literal notranslate"><span class="pre">-Xmx24g</span></code>) and young generation heap size
+(e.g. <code class="code docutils literal notranslate"><span class="pre">-Xmn16g</span></code>) for the namenodes and TCP datanodes to improve performance
+for large deployments.</p>
+</div>
+<div class="section" id="core-site-xml">
+<h2>core-site.xml<a class="headerlink" href="#core-site-xml" title="Permalink to this headline">¶</a></h2>
+<p>To configure the HDFS adapter modify core-site.xml. For example the Crail shell
+<code class="code docutils literal notranslate"><span class="pre">crail</span> <span class="pre">fs</span></code> uses the HDFS adapter thus requiring the core-site.xml file to
+be setup. Modify <code class="code docutils literal notranslate"><span class="pre">fs.defaultFS</span></code> to match <code class="code docutils literal notranslate"><span class="pre">crail.namenode.address</span></code> in
+<a class="reference internal" href="#crail-site-conf"><span class="std std-ref">crail-site.conf</span></a>. The default is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>crail://localhost:9060<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slaves">
+<h2>slaves<a class="headerlink" href="#slaves" title="Permalink to this headline">¶</a></h2>
+<p>The slaves file can be used to ease starting Crail on larger deployments. Refer
+to <a class="reference internal" href="run.html#run"><span class="std std-ref">Run</span></a> for details. Each line should contain a hostname where a storage
+tier is supposed to be started. Make sure the hostname allows passwordless ssh
+connections. Note that the hostnames are not used by the storage tier itself but
+only by the start/stop-crail.sh scripts to start and stop storage tiers.
+IP/hostname of the storage tiers or any other configuration option are either
+passed by command line arguments or via <a class="reference internal" href="#crail-site-conf"><span class="std std-ref">crail-site.conf</span></a>.
+Command line arguments can be configured in the slaves file following the hostname.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="docker.html" class="btn btn-neutral float-left" title="Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="run.html" class="btn btn-neutral float-right" title="Run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Apache Software Foundation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

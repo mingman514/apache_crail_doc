@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iobench &mdash; Apache Crail incubating 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fsck" href="fsck.html" />
+    <link rel="prev" title="Shell" href="shell.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Apache Crail incubating
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deploy Crail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Building from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Shell</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">iobench</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-reference">Command Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fsck.html">fsck</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark.html">Spark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="develop.html">Programming against Crail</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="release.html">How to release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Crail incubating</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>iobench</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/iobench.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="iobench">
+<h1>iobench<a class="headerlink" href="#iobench" title="Permalink to this headline">¶</a></h1>
+<p>The iobench tool allows to perform microbenchmarks on Crail.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Synchronously write 1MB 1024 times to get a 1GB file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$CRAIL_HOME</span>/bin/crail iobench -t write -f /filename -s <span class="k">$((</span><span class="m">1024</span><span class="o">*</span><span class="m">1024</span><span class="k">))</span> -k <span class="m">1024</span>
+</pre></div>
+</div>
+<p>Read 1024 1MB buffers asynchronously with a batch size of 4:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$CRAIL_HOME</span>/bin/crail iobench -t readSequentialAsync -f /filename -s <span class="k">$((</span><span class="m">1024</span><span class="o">*</span><span class="m">1024</span><span class="k">))</span> -k <span class="m">1024</span> -b <span class="m">4</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-reference">
+<h2>Command Reference<a class="headerlink" href="#command-reference" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Argument</th>
+<th class="head">Default</th>
+<th class="head">Experiment type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-t</span> <span class="pre">&lt;experiment&gt;</span></code></td>
+<td><em>-</em></td>
+<td>N/A</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code> - sequential sync write</li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code> - sequential async write</li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code> - sequential sync read</li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code> - random sync read</li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code> - sequential async read</li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code> - multistream read</li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFile</span></code> - create file RPC</li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFileAsync</span></code> - create file async RPC</li>
+<li><code class="code docutils literal notranslate"><span class="pre">createMultiFile</span></code> - create multifile</li>
+<li><code class="code docutils literal notranslate"><span class="pre">getKey</span></code> - getKey RPC</li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFile</span></code> - getFile sync RPC</li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFileAsync</span></code> - getFile async RPC</li>
+<li><code class="code docutils literal notranslate"><span class="pre">enumerateDir</span></code> - enumerate directory</li>
+<li><code class="code docutils literal notranslate"><span class="pre">browseDir</span></code> - browse directory</li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeInt</span></code> - write integer</li>
+<li><code class="code docutils literal notranslate"><span class="pre">readInt</span></code> - read integer</li>
+<li><code class="code docutils literal notranslate"><span class="pre">seekInt</span></code> - seek integer</li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStreamInt</span></code> - read integer multistream</li>
+<li><code class="code docutils literal notranslate"><span class="pre">printLocationclass</span></code> - print machine’s location class</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-f</span> <span class="pre">&lt;path&gt;</span></code></td>
+<td>/tmp.dat</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createMultiFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getKey</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">enumerateDir</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">browseDir</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeInt</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readInt</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">seekInt</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStreamInt</span></code></li>
+</ul>
+</td>
+<td>Path to perform operation with</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-s</span> <span class="pre">&lt;size&gt;</span></code></td>
+<td><a class="reference internal" href="config.html#crail-site-conf"><span class="std std-ref">crail.buffersize</span></a></td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getKey</span></code></li>
+</ul>
+</td>
+<td>Buffer size in bytes. Only relevant for buffered experiments.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-k</span> <span class="pre">&lt;n&gt;</span></code></td>
+<td>1</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getKey</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeInt</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readInt</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">seekInt</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStreamInt</span></code></li>
+</ul>
+</td>
+<td>Number of operations to perform</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-b</span> <span class="pre">&lt;size&gt;</span></code></td>
+<td>1</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createMultiFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">enumerateDir</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStreamInt</span></code></li>
+</ul>
+</td>
+<td>Batch size of asynchronous requests.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-c</span> <span class="pre">&lt;storage_class&gt;</span></code></td>
+<td>0</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFile</span></code></li>
+</ul>
+</td>
+<td>Storage class of file.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-p</span> <span class="pre">&lt;location_class&gt;</span></code></td>
+<td>0</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFile</span></code></li>
+</ul>
+</td>
+<td>Location class of file</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-w</span> <span class="pre">&lt;n&gt;</span></code></td>
+<td>32</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">createFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFile</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">getFileAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">enumerateDir</span></code></li>
+</ul>
+</td>
+<td>Number of warmup operations</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-e</span> <span class="pre">&lt;experiments&gt;</span></code></td>
+<td>1</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+</ul>
+</td>
+<td>Number of experiments to run</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-o</span> <span class="pre">&lt;true/false&gt;</span></code></td>
+<td>false</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequentialAsync</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readMultiStream</span></code></li>
+</ul>
+</td>
+<td>Keep file system open between experiments</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-d</span> <span class="pre">&lt;true/false&gt;</span></code></td>
+<td>false</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">writeAsync</span></code></li>
+</ul>
+</td>
+<td>Skip writing directory record</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-m</span> <span class="pre">&lt;true/false</span></code></td>
+<td>true</td>
+<td><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">write</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readSequential</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">readRandom</span></code></li>
+</ul>
+</td>
+<td>Use buffered streams</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="shell.html" class="btn btn-neutral float-left" title="Shell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fsck.html" class="btn btn-neutral float-right" title="fsck" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Apache Software Foundation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

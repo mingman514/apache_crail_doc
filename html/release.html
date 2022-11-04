@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to release &mdash; Apache Crail incubating 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contribute" href="contribute.html" />
+    <link rel="prev" title="Programming against Crail" href="develop.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Apache Crail incubating
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deploy Crail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Building from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iobench.html">iobench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fsck.html">fsck</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark.html">Spark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="develop.html">Programming against Crail</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Help</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configure-your-environment-for-a-release">1. Configure your environment for a release</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-git-username">1.1 Setup git username</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-keys">1.2 Setup keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maven-settings-file">1.3 Maven Settings File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#preparing-for-a-release">2. Preparing for a release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#voting-on-an-rc">3. Voting on an RC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ppmc-voting">3.1 PPMC voting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipmc-voting">3.2 IPMC voting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#after-acceptance">4. After acceptance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#useful-links">5. Useful links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Crail incubating</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>How to release</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/release.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="how-to-release">
+<h1><a class="toc-backref" href="#id1">How to release</a><a class="headerlink" href="#how-to-release" title="Permalink to this headline">¶</a></h1>
+<p>This guide explains how to prepare for a source and binary release of Apache Crail (Incubating) project for
+a release number of <code class="docutils literal notranslate"><span class="pre">x.y</span></code> (indicated as <code class="docutils literal notranslate"><span class="pre">${RELEASE_VERSION}</span></code>) and release candidate number <code class="docutils literal notranslate"><span class="pre">X</span></code> as <code class="docutils literal notranslate"><span class="pre">rcX</span></code>
+(indicated as <code class="docutils literal notranslate"><span class="pre">${RELEASE_CANDIDATE}</span></code>).</p>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#how-to-release" id="id1">How to release</a><ul>
+<li><a class="reference internal" href="#configure-your-environment-for-a-release" id="id2">1. Configure your environment for a release</a><ul>
+<li><a class="reference internal" href="#setup-git-username" id="id3">1.1 Setup git username</a></li>
+<li><a class="reference internal" href="#setup-keys" id="id4">1.2 Setup keys</a></li>
+<li><a class="reference internal" href="#maven-settings-file" id="id5">1.3 Maven Settings File</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#preparing-for-a-release" id="id6">2. Preparing for a release</a></li>
+<li><a class="reference internal" href="#voting-on-an-rc" id="id7">3. Voting on an RC</a><ul>
+<li><a class="reference internal" href="#ppmc-voting" id="id8">3.1 PPMC voting</a></li>
+<li><a class="reference internal" href="#ipmc-voting" id="id9">3.2 IPMC voting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#after-acceptance" id="id10">4. After acceptance</a></li>
+<li><a class="reference internal" href="#useful-links" id="id11">5. Useful links</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configure-your-environment-for-a-release">
+<h2><a class="toc-backref" href="#id2">1. Configure your environment for a release</a><a class="headerlink" href="#configure-your-environment-for-a-release" title="Permalink to this headline">¶</a></h2>
+<p>Before we do a release, lets start by setting up the release environment (and cross check some of the other
+settings).</p>
+<div class="section" id="setup-git-username">
+<h3><a class="toc-backref" href="#id3">1.1 Setup git username</a><a class="headerlink" href="#setup-git-username" title="Permalink to this headline">¶</a></h3>
+<p>Make sure <code class="docutils literal notranslate"><span class="pre">git</span></code> is configured properly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config user.email <span class="s2">&quot;your_id@apache.org&quot;</span>
+git config user.name <span class="s2">&quot;your_name&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-keys">
+<h3><a class="toc-backref" href="#id4">1.2 Setup keys</a><a class="headerlink" href="#setup-keys" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Generate a code signing key, <a class="reference external" href="https://www.apache.org/dev/openpgp.html#generate-key">https://www.apache.org/dev/openpgp.html#generate-key</a></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gpg --gen-key
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Check the preference for SHA-1 for your key, <a class="reference external" href="https://www.apache.org/dev/openpgp.html#key-gen-avoid-sha1">https://www.apache.org/dev/openpgp.html#key-gen-avoid-sha1</a></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gpg --edit-key your_key_id
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Upload/publish the key: <a class="reference external" href="https://www.apache.org/dev/release-signing.html#keyserver-upload">https://www.apache.org/dev/release-signing.html#keyserver-upload</a></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gpg --keyserver pgp.mit.edu --send-keys &lt;key id&gt;
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Add your KEY in the KEYS file:</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>svn co https://dist.apache.org/repos/dist/release/incubator/crail/
+<span class="nb">cd</span> crail
+<span class="o">(</span>gpg --list-sigs &lt;key id&gt; <span class="o">&amp;&amp;</span> gpg --armor --export &lt;key id&gt;<span class="o">)</span> &gt;&gt; KEYS
+svn commit KEYS -m <span class="s2">&quot;your_name (id@apache.org) keys&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>Update your profile <a class="reference external" href="https://id.apache.org/">https://id.apache.org/</a> with the fingerprint of the key. Find your fingerprint at</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gpg --fingerprint
+</pre></div>
+</div>
+</div>
+<div class="section" id="maven-settings-file">
+<h3><a class="toc-backref" href="#id5">1.3 Maven Settings File</a><a class="headerlink" href="#maven-settings-file" title="Permalink to this headline">¶</a></h3>
+<p>Prior to performing an Apache Crail release, you must have an entry such as this in your ~/.m2/settings.xml file to authenticate when deploying the release artifacts.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span> <span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+ <span class="nt">&lt;settings</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span>
+     <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+     <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;servers&gt;</span>
+     <span class="nt">&lt;server&gt;</span>
+       <span class="nt">&lt;id&gt;</span>apache.snapshots.https<span class="nt">&lt;/id&gt;</span>
+       <span class="nt">&lt;username&gt;</span>USERNAME<span class="nt">&lt;/username&gt;</span>
+       <span class="nt">&lt;password&gt;</span>PASSWORD<span class="nt">&lt;/password&gt;</span>
+     <span class="nt">&lt;/server&gt;</span>
+     <span class="nt">&lt;server&gt;</span>
+       <span class="nt">&lt;id&gt;</span>apache.releases.https<span class="nt">&lt;/id&gt;</span>
+       <span class="nt">&lt;username&gt;</span>USERNAME<span class="nt">&lt;/username&gt;</span>
+       <span class="nt">&lt;password&gt;</span>PASSWORD<span class="nt">&lt;/password&gt;</span>
+     <span class="nt">&lt;/server&gt;</span>
+   <span class="nt">&lt;/servers&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</pre></div>
+</div>
+<p>How to put encrypted password <a class="reference external" href="https://maven.apache.org/guides/mini/guide-encryption.html">https://maven.apache.org/guides/mini/guide-encryption.html</a></p>
+</div>
+</div>
+<div class="section" id="preparing-for-a-release">
+<h2><a class="toc-backref" href="#id6">2. Preparing for a release</a><a class="headerlink" href="#preparing-for-a-release" title="Permalink to this headline">¶</a></h2>
+<p>A release consists of a doing a (i) source release; (b) binary release; (iii) uploading maven artifacts; (iv) updating documentation. To do a version release of <code class="docutils literal notranslate"><span class="pre">x.y</span></code> (which is referred to as <code class="docutils literal notranslate"><span class="pre">${RELEASE_VERSION}</span></code>), follow these steps:</p>
+<ol class="arabic simple">
+<li>Update <code class="docutils literal notranslate"><span class="pre">GIT_COMMIT</span></code> in <code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code> to the newest release tag, e.g. <code class="docutils literal notranslate"><span class="pre">v1.2</span></code>. In <code class="docutils literal notranslate"><span class="pre">docker/RDMA/Dockerfile</span></code> update <code class="docutils literal notranslate"><span class="pre">FROM</span></code> to the last Crail version as defined in the parent
+Dockerfile e.g. <code class="docutils literal notranslate"><span class="pre">1.2</span></code> (without “v”) and <code class="docutils literal notranslate"><span class="pre">DISNI_COMMIT</span></code> to the DiSNI version as specified in the parent pom file.</li>
+<li>Go through the closed JIRAs and merge requests, and update the HISTORY.md file about what is new in the new release version.</li>
+<li>Perform <code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">apache-rat:check</span></code> and make sure it is a SUCCESS.</li>
+<li>Perform <code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">checkstyle:check</span></code>. For now it will fail, but make sure that it runs. We need to gradually fix it. [JIRA-59](<a class="reference external" href="https://issues.apache.org/jira/browse/CRAIL-59">https://issues.apache.org/jira/browse/CRAIL-59</a>)</li>
+<li>Perform maven prepare release in the interactive mode.</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn release:prepare -P apache-release -Darguments<span class="o">=</span><span class="s2">&quot;-DskipTests&quot;</span>  -DinteractiveMode<span class="o">=</span><span class="nb">true</span> -Dresume<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>The interactive mode allows us to explicitly name the current release version, release candidate, and next version. The convention here is to follow <code class="docutils literal notranslate"><span class="pre">apache-crail-${RELEASE_VERSION}-incubating-${RELEASE_CANDIDATE}</span></code> naming, starting from release candidate 0. So, for a ${RELEASE_VERSION} of 2.12 and release candidate 10, the name would be <code class="docutils literal notranslate"><span class="pre">apache-crail-2.12-incubating-rc10</span></code>. For <code class="docutils literal notranslate"><span class="pre">rc0</span></code>, we let the command increment the pom version. Here is an example run of this command for the release for <code class="docutils literal notranslate"><span class="pre">1.2-incubating</span></code>. As you can see, the first time you run the command (for <code class="docutils literal notranslate"><span class="pre">rc0</span></code>, the version are picked automatically). For subsequent RCs, you have to make sure that version is not incremented unless a RC is successfully voted on. Between RCs, we expect everything to remain the same except the <code class="docutils literal notranslate"><span class="pre">SCM</span> <span class="pre">release</span> <span class="pre">tag</span></code> that you must keep in sync with the release candidate.</p>
+<p><strong>NOTE:</strong> the SCM tag does not have <code class="docutils literal notranslate"><span class="pre">incubating</span></code> in its name, and uses a <code class="docutils literal notranslate"><span class="pre">v</span></code> prefix.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span> Checking dependencies and plugins <span class="k">for</span> snapshots ...
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail Project Parent POM&quot;</span>? <span class="o">(</span>org.apache.crail:crail-parent<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail Client Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-client<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail RPC Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-rpc<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail Namenode Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-namenode<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail Storage Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail RDMA Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage-rdma<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail NVMf Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage-nvmf<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail Storage NaRPC Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage-narpc<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail DaRPC Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-rpc-darpc<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail RPC/TCP Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-rpc-narpc<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail HDFS Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-hdfs<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is the release version <span class="k">for</span> <span class="s2">&quot;Crail Project Assembly&quot;</span>? <span class="o">(</span>org.apache.crail:crail-assembly<span class="o">)</span> <span class="m">1</span>.2-incubating: : <span class="m">1</span>.2-incubating
+What is SCM release tag or label <span class="k">for</span> <span class="s2">&quot;Crail Project Parent POM&quot;</span>? <span class="o">(</span>org.apache.crail:crail-parent<span class="o">)</span> crail-parent-1.2-incubating: : v1.2-rc0
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail Project Parent POM&quot;</span>? <span class="o">(</span>org.apache.crail:crail-parent<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail Client Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-client<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail RPC Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-rpc<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail Namenode Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-namenode<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail Storage Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail RDMA Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage-rdma<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail NVMf Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage-nvmf<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail Storage NaRPC Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-storage-narpc<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail DaRPC Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-rpc-darpc<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail RPC/TCP Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-rpc-narpc<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail HDFS Project&quot;</span>? <span class="o">(</span>org.apache.crail:crail-hdfs<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+What is the new development version <span class="k">for</span> <span class="s2">&quot;Crail Project Assembly&quot;</span>? <span class="o">(</span>org.apache.crail:crail-assembly<span class="o">)</span> <span class="m">1</span>.3-incubating-SNAPSHOT: : <span class="m">1</span>.3-incubating-SNAPSHOT
+<span class="o">[</span>INFO<span class="o">]</span> Transforming <span class="s1">&#39;Crail Project Parent POM&#39;</span>...
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>In case, if you are not sure about some setting, try <cite>-DdryRun=true</cite>.  If something goes wrong then <code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">release:rollback</span></code>.</p>
+<p><strong>NOTE:</strong> the binary file and associated signature (asc) and sha512 files are generated
+at <code class="docutils literal notranslate"><span class="pre">assembly/target/crail-${RELEASE_VERSION}-incubating-bin.tar.gz</span></code>.  The source file and associated signature (asc) and sha512 files are
+at <code class="docutils literal notranslate"><span class="pre">assembly/target/crail-${RELEASE_VERSION}-incubating-src.tar.gz</span></code>.</p>
+<ol class="arabic simple" start="6">
+<li>We need to upload the generated artifacts to the “Stage” SVN at <a class="reference external" href="https://dist.apache.org/repos/dist/dev/incubator/crail/">https://dist.apache.org/repos/dist/dev/incubator/crail/</a>. So lets prepare that in a SVN staging directory (SSD)</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>svn co https://dist.apache.org/repos/dist/dev/incubator/crail/
+<span class="nb">cd</span> crail
+mkdir <span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-<span class="si">${</span><span class="nv">RELEASE_CANDIDATE</span><span class="si">}</span>
+<span class="c1"># lets call the created directory the svn staging directory (SSD)</span>
+<span class="nv">SSD</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-<span class="si">${</span><span class="nv">RELEASE_CANDIDATE</span><span class="si">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li>Collect all artifacts to release in the SVN staging directory (SSD)</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># copy files from the crail build location to the SVN staging directory (SSD)</span>
+<span class="c1"># binary file</span>
+cp assembly/target/apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-bin.tar.gz <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>/
+<span class="c1"># source file</span>
+cp assembly/target/apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-src.tar.gz <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>/
+<span class="c1"># copy signature files</span>
+cp assembly/target/apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-bin.tar.gz.asc <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>/
+cp assembly/target/apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-src.tar.gz.asc <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>/
+<span class="c1"># copy checksum files</span>
+cp assembly/target/apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-bin.tar.gz.sha512 <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>/
+cp assembly/target/apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-src.tar.gz.sha512 <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>/
+<span class="c1"># step in the SVN staging directory</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SSD</span><span class="si">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li>Verify the checksums for source and binary files</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sha512sum -c apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-src.tar.gz.sha512
+sha512sum -c apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-bin.tar.gz.sha512
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li>Verify the signatures for source and binary files</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gpg --verify apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-src.tar.gz.asc apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-src.tar.gz
+gpg --verify apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-bin.tar.gz.asc apache-crail-<span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating-bin.tar.gz
+</pre></div>
+</div>
+<ol class="arabic simple" start="10">
+<li>Commit the files after verification in the SVN staging directory</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>svn add <span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-<span class="si">${</span><span class="nv">RELEASE_CANDIDATE</span><span class="si">}</span>
+svn commit <span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-<span class="si">${</span><span class="nv">RELEASE_CANDIDATE</span><span class="si">}</span> -m <span class="s2">&quot;</span><span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">RELEASE_CANDIDATE</span><span class="si">}</span><span class="s2"> release files&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="11">
+<li>Upload the artifacts to the Nexus <a class="reference external" href="https://repository.apache.org/index.html#welcome">https://repository.apache.org/index.html#welcome</a> (login using your Apache ID) by calling</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn release:perform -P apache-release  -Darguments<span class="o">=</span><span class="s2">&quot;-DskipTests&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="12">
+<li>After upload you need to<ol class="arabic">
+<li>Close the staging repository at <a class="reference external" href="https://repository.apache.org">https://repository.apache.org</a></li>
+<li>Login to <a class="reference external" href="https://repository.apache.org">https://repository.apache.org</a>.</li>
+<li>Go to “Staging Repos”.</li>
+<li>Find the “orgapachecrail” repo with the Crail release. Be sure to expand the contents of the repo to confirm that it contains the correct Crail artifacts.</li>
+<li>Click on the “Close” button at top, and enter a brief description, such as “Apache Crail (Incubating) ${RELEASE_VERSION} release”. <strong>Note</strong> this might fail on the very first attempt just repeat closing it.</li>
+<li>Copy the staging URL like <code class="docutils literal notranslate"><span class="pre">https://repository.apache.org/content/repositories/orgapachecrail-1000/</span></code></li>
+</ol>
+</li>
+</ol>
+<p>13. [Optionally] Check if docker images have been created successfully <a class="reference external" href="https://hub.docker.com/r/apache/incubator-crail/">https://hub.docker.com/r/apache/incubator-crail/</a> and
+<a class="reference external" href="https://hub.docker.com/r/apache/incubator-crail-rdma/">https://hub.docker.com/r/apache/incubator-crail-rdma/</a>. Make sure that the docker configuration file at
+<a class="reference external" href="https://github.com/apache/incubator-crail/blob">https://github.com/apache/incubator-crail/blob</a>/v${RELEASE_VERSION}-${RELEASE_CANDIDATE}/docker/RDMA/Dockerfile contains the right
+tag version for <code class="docutils literal notranslate"><span class="pre">FROM</span> <span class="pre">crail:[RELEASE_TAG]</span></code> and the right DiSNI version (which matches the pom file for this release)
+at <code class="docutils literal notranslate"><span class="pre">ARG</span> <span class="pre">DISNI_COMMIT=&quot;[DISNI_VERSION_FROM_CRAIL_POM]&quot;</span></code>.</p>
+</div>
+<div class="section" id="voting-on-an-rc">
+<h2><a class="toc-backref" href="#id7">3. Voting on an RC</a><a class="headerlink" href="#voting-on-an-rc" title="Permalink to this headline">¶</a></h2>
+<p>The voting is a 2 step process.</p>
+<div class="section" id="ppmc-voting">
+<h3><a class="toc-backref" href="#id8">3.1 PPMC voting</a><a class="headerlink" href="#ppmc-voting" title="Permalink to this headline">¶</a></h3>
+<p>First, we need to gather 3 binding votes (PPMC members) on the crail mailing list. To call the vote, you can use this template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Subject: [VOTE] Release of Apache Crail-${RELEASE_VERSION}-incubating [${RELEASE_CANDIDATE}]
+============================================================================
+
+Hi all,
+
+This is a call for a vote on releasing Apache Crail ${RELEASE_VERSION}-incubating, release candidate X.
+
+The source and binary tarball, including signatures, digests, etc. can be found at:
+https://dist.apache.org/repos/dist/dev/incubator/crail/${RELEASE_VERSION}-incubating-${RELEASE_CANDIDATE}/
+
+The commit to be voted upon:
+https://git-wip-us.apache.org/repos/asf?p=incubator-crail.git;a=commit;h=[REF]
+
+The Nexus Staging URL:
+https://repository.apache.org/content/repositories/orgapachecrail-[STAGE_ID]
+
+Release artifacts are signed with the following key:
+https://www.apache.org/dist/incubator/crail/KEYS
+
+For information about the contents of this release, see:
+https://git-wip-us.apache.org/repos/asf?p=incubator-crail.git;a=blob;f=HISTORY.md;h=${RELEASE_HASH}
+or https://github.com/apache/incubator-crail/blob/v${RELEASE_VERSION}-${RELEASE_CANDIDATE}/HISTORY.md
+
+Please vote on releasing this package as Apache Crail ${RELEASE_VERSION}-incubating
+
+The vote will be open for 72 hours.
+
+[ ] +1 Release this package as Apache Crail ${RELEASE_VERSION}-incubating
+[ ] +0 no opinion
+[ ] -1 Do not release this package because ...
+
+
+Thanks,
+[YOUR_NAME]
+</pre></div>
+</div>
+<p>Make sure that you modify (i) ${RELEASE_VERSION} in the subject and body; (ii) ${RELEASE_CANDIDATE} tags; (iii) ${RELEASE_HASH}; (iv) [STAGE_ID]; (iv) YOUR_NAME</p>
+<p>After a successful vote, announce the result on the Crail mailing list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Subject: [RESULT][VOTE] Crail v${RELEASE_VERSION}-${RELEASE_CANDIDATE} release
+==============================================
+
+Hi all,
+
+Thanks for all who voted. I&#39;m closing the vote since the 72 hours have passed. Here are the results:
+X + votes
+Y - votes
+
+I will call for the IPMC vote.
+
+Thanks,
+[YOUR_NAME]
+</pre></div>
+</div>
+</div>
+<div class="section" id="ipmc-voting">
+<h3><a class="toc-backref" href="#id9">3.2 IPMC voting</a><a class="headerlink" href="#ipmc-voting" title="Permalink to this headline">¶</a></h3>
+<p>After a succesfull PPMC vote, we need to call for the IPMC vote on the <code class="docutils literal notranslate"><span class="pre">general&#64;incubator.apache.org</span></code> (<a class="reference external" href="https://incubator.apache.org/guides/lists.html">https://incubator.apache.org/guides/lists.html</a>). You can use this template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Subject:[VOTE] Apache Crail ${RELEASE_VERSION}-incubating (${RELEASE_CANDIDATE})
+================================================
+
+Please vote to approve the source release of Apache Crail ${RELEASE_VERSION}-incubating (${RELEASE_CANDIDATE}).
+[If any] This release candidate fixes all issues raised in the last IPMC vote:
+- x
+- y
+- z
+
+The podling dev vote thread:
+
+https://www.mail-archive.com/dev@crail.apache.org/???.html
+
+The result:
+
+https://www.mail-archive.com/dev@crail.apache.org/???.html
+
+Commit hash: ${RELEASE_HASH}
+
+https://git1-us-west.apache.org/repos/asf?p=incubator-crail.git;a=commit;h=${RELEASE_HASH}
+
+Release files can be found at:
+https://dist.apache.org/repos/dist/dev/incubator/crail/${RELEASE_VERSION}-${RELEASE_CANDIDATE}/
+
+The Nexus Staging URL:
+https://repository.apache.org/content/repositories/orgapachecrail-[STAGE_ID]
+
+Release artifacts are signed with the following key:
+https://www.apache.org/dist/incubator/crail/KEYS
+
+For information about the contents of this release, see:
+https://git-wip-us.apache.org/repos/asf?p=incubator-crail.git;a=blob;f=HISTORY.md;h=${RELEASE_HASH}
+or https://github.com/apache/incubator-crail/blob/v${RELEASE_VERSION}-${RELEASE_CANDIDATE}/HISTORY.md
+
+The vote is open for at least 72 hours and passes if a majority of at least 3 +1 PMC votes are cast.
+
+[ ] +1 Release this package as Apache Crail 1.0-incubating
+[ ] -1 Do not release this package because ...
+
+Thanks,
+[YOUR_NAME]
+</pre></div>
+</div>
+<p>After a successful vote, annouce the result as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Subject: [RESULT][VOTE] Apache Crail ${RELEASE_VERSION}-incubating (${RELEASE_CANDIDATE})
+=========================================================
+
+Hi all,
+
+Thanks for all your votes. Here is the result:
+x + votes
+y - votes
+
+[If any] Some comments for future votes that I&#39;m about to address:
+- x
+- y
+- z
+
+I&#39;m going to release Crail ${RELEASE_VERSION}-incubating. Thank you all for making this happen!
+
+Thanks,
+[YOUR_NAME]
+</pre></div>
+</div>
+<p>Obviosuly not all calls to vote can succeed. In case of a failed vote, announce as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Subject:[CANCEL][VOTE] Release of Apache Crail ${RELEASE_VERSION}-incubating (${RELEASE_CANDIDATE})
+===================================================================
+
+Hi all,
+I&#39;m canceling the vote for Apache Crail ${RELEASE_VERSION}-incubating (${RELEASE_CANDIDATE}), due to found/discussed issues.
+
+I will prepare a new release candidate.
+
+Thanks,
+[YOUR_NAME]
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> If your PPMC vote fails you have to redo the IPMC vote again after fixing the issues raised in the PPMC vote.</p>
+</div>
+</div>
+<div class="section" id="after-acceptance">
+<h2><a class="toc-backref" href="#id10">4. After acceptance</a><a class="headerlink" href="#after-acceptance" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Tag the commit (on which the vote happened) with the release version without <code class="docutils literal notranslate"><span class="pre">-${RELEASE_CANDIDATE}</span></code>. So, for example, after a successful vote on <code class="docutils literal notranslate"><span class="pre">v1.2-rc5</span></code>, the hash will be tagged again with <code class="docutils literal notranslate"><span class="pre">v1.2</span></code> only.</li>
+<li>Upload to the “release” (this is different from the “staging” SVN that we used before) SVN <a class="reference external" href="https://dist.apache.org/repos/dist/release/incubator">https://dist.apache.org/repos/dist/release/incubator</a></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>svn co https://dist.apache.org/repos/dist/release/incubator
+<span class="nb">cd</span> incubator/crail
+mkdir <span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">RELEASE_VERSION</span><span class="si">}</span>-incubating
+<span class="c1"># copy the tar.gz. asc. and sha512 files for the src and binary releases</span>
+<span class="c1"># Remove old releases and commit</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Release nexus artifacts. Follow the step 12 in the release process but this time press the <code class="docutils literal notranslate"><span class="pre">release</span></code> button.</li>
+</ol>
+<p>4. Write an announement email. You have to make announcement at two places, the general Apache announcement as well to crail mailing list.
+You can use this template to make the announcement:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Subject: [ANNOUNCE] Apache Crail ${RELEASE_VERSION}-incubating released
+========================================================
+
+The Apache Crail community is pleased to announce the release of
+Apache Crail version ${RELEASE_VERSION}-incubating.
+
+[If any] The key features of this release are:
+- x
+- y
+- z
+
+Crail is a high-performance distributed data store designed for fast
+sharing of ephemeral data in distributed data processing workloads. You
+can read more about Crail on the website: https://crail.apache.org/
+
+The release is available at:
+https://crail.incubator.apache.org/download/
+
+The full change log is available here:
+https://github.com/apache/incubator-crail/blob/v${RELEASE_VERSION}/HISTORY.md
+
+We welcome any help and feedback. Check out https://crail.incubator.apache.org/community/
+to get involved.
+
+Thanks to all involved for making this first release happen!
+
+Thanks,
+[YOUR_NAME]
+
+--
+Apache Crail is an effort undergoing incubation at The Apache Software
+Foundation (ASF), sponsored by the Apache Incubator PMC. Incubation is
+required of all newly accepted projects until a further review
+indicates that the infrastructure, communications, and decision making
+process have stabilized in a manner consistent with other successful
+ASF projects. While incubation status is not necessarily a reflection
+of the completeness or stability of the code, it does indicate that the
+project has yet to be fully endorsed by the ASF.```
+</pre></div>
+</div>
+<p>The Apache annoucement list is at <code class="docutils literal notranslate"><span class="pre">announce&#64;apache.org</span></code>. You need to subscribe first.</p>
+<ol class="arabic simple" start="5">
+<li>Update the download page on the website</li>
+<li>Social media (Twitter, LinkedIn announcements)</li>
+<li>[Optionally] Check if docker images have been created successfully <a class="reference external" href="https://hub.docker.com/r/apache/incubator-crail/">https://hub.docker.com/r/apache/incubator-crail/</a> and <a class="reference external" href="https://hub.docker.com/r/apache/incubator-crail-rdma/">https://hub.docker.com/r/apache/incubator-crail-rdma/</a> with the new release tag.</li>
+</ol>
+</div>
+<div class="section" id="useful-links">
+<h2><a class="toc-backref" href="#id11">5. Useful links</a><a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>General info for release signing: <a class="reference external" href="https://www.apache.org/dev/release-signing.html">https://www.apache.org/dev/release-signing.html</a></li>
+<li><a class="reference external" href="http://tephra.incubator.apache.org/ReleaseGuide.html">http://tephra.incubator.apache.org/ReleaseGuide.html</a></li>
+<li><a class="reference external" href="https://dubbo.incubator.apache.org/en-us/blog/prepare-an-apache-release.html">https://dubbo.incubator.apache.org/en-us/blog/prepare-an-apache-release.html</a></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="develop.html" class="btn btn-neutral float-left" title="Programming against Crail" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contribute.html" class="btn btn-neutral float-right" title="Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Apache Software Foundation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
